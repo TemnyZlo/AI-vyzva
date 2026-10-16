@@ -1,0 +1,33 @@
+@page
+@model KartickaModel
+@{
+    ViewData["Title"] = "Kartička k tisku";
+}
+
+<div class="no-print print-intro">
+    <p class="lead">Vytiskněte si kartičku a vyplňte ji propiskou. Nic z toho, co na ni napíšete, nikam neposíláme.</p>
+    <button type="button" class="btn btn-primary" onclick="window.print()">🖨️ Vytisknout</button>
+</div>
+
+<section class="print-card">
+    <h1>🛡️ Naše rodinná pravidla proti podvodům</h1>
+
+    <partial name="_ThreeZ" />
+
+    <div class="fill-row"><span>Naše rodinné heslo:</span><span class="fill-line"></span></div>
+    <p class="small">Když někdo z rodiny volá nebo píše a chce peníze, zeptejte se na heslo. Heslo nikam nepište do mobilu.</p>
+
+    <ol class="rules-list">
+        @foreach (var r in Model.Rules)
+        {
+            <li><strong>@r.Title</strong> – @r.Text</li>
+        }
+    </ol>
+
+    <h2>Kam volat</h2>
+    <div class="fill-row"><span>Moje banka (číslo ze zadní strany karty):</span><span class="fill-line"></span></div>
+    <div class="fill-row"><span>Kdo z rodiny mi poradí:</span><span class="fill-line"></span></div>
+    <div class="fill-row"><span>Jeho/její telefon:</span><span class="fill-line"></span></div>
+    <p><strong>Nachytal(a) jsem se:</strong> 1) hned volat banku a nechat zablokovat kartu a bankovnictví, 2) volat Policii ČR <strong>158</strong>, 3) nic dalšího neposílat a uschovat zprávy.</p>
+    <p><strong>Policie ČR: 158</strong> · Tísňová linka: 112</p>
+</section>

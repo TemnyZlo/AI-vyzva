@@ -1,0 +1,41 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Úvod";
+}
+
+<h1>Nachytej se nanečisto</h1>
+<div class="hero">
+<p class="lead">Vyzkoušejte si podvodné zprávy a telefonáty <strong>bez rizika</strong>. Tady se nachytat nevadí – právě o to jde.</p>
+</div>
+
+<ul class="steps steps-colored">
+    <li><span class="step-num">1</span> Odpovíte na 5 krátkých otázek, ať zprávy sedí na váš život.</li>
+    <li><span class="step-num">2</span> Projdete 6 zpráv. U každé vyberete, co byste udělali. Některé jsou podvod, některé ne.</li>
+    <li><span class="step-num">3</span> U každé zprávy uvidíte, na čem se dal podvod poznat.</li>
+    <li><span class="step-num">4</span> Po druhém kole uvidíte, jak jste se zlepšili, a odnesete si kartičku s rodinnými pravidly.</li>
+</ul>
+<partial name="_ThreeZ" />
+
+<p class="muted">Zabere to asi 15 minut. Nechceme po vás jméno, e-mail ani telefon.</p>
+
+<form method="post" class="card">
+    <fieldset>
+        <legend>Jak to budete procházet?</legend>
+        <label class="choice">
+            <input type="radio" name="Mode" value="sam" checked />
+            <span><strong>🙋 Sám / sama</strong><br /><span class="muted">Projdu si to sám.</span></span>
+        </label>
+        <label class="choice">
+            <input type="radio" name="Mode" value="dvojice" />
+            <span><strong>👨‍👦 Ve dvojici</strong><br /><span class="muted">Ukazuji to mámě, tátovi nebo babičce. Dostanu tipy, jak to vysvětlit.</span></span>
+        </label>
+    </fieldset>
+
+    <label class="consent">
+        <input type="checkbox" name="Consent" value="true" />
+        <span>Souhlasím s uložením <strong>anonymních</strong> výsledků (bez jména a kontaktu) – pomůže to ověřit, jestli trénink funguje. Nepovinné. <a href="/OchranaDat">Co přesně se uloží</a></span>
+    </label>
+
+    <button type="submit" class="btn btn-primary">Začít ▶</button>
+</form>

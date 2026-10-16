@@ -1,0 +1,36 @@
+@page
+@model MezikoloModel
+@{
+    ViewData["Title"] = "Po prvním kole";
+}
+
+<h1>První kolo je za vámi 👏</h1>
+<p class="lead">Bezpečně jste zvládli <strong>@Model.Result.Safe z @Model.Result.Count</strong> zpráv. Teď si v klidu projděte pravidla, která fungují i na podvody, které ještě nikdo nevymyslel.</p>
+
+<partial name="_ThreeZ" />
+
+<aside class="insight">
+    <span aria-hidden="true">⏱️</span> <strong>Věděli jste?</strong> V testu České bankovní asociace a společnosti ESET si časového nátlaku v podvodném e-mailu všimla jen asi třetina lidí. Spěch je trik, který přehlížíme nejčastěji.
+</aside>
+
+<section class="rules-box">
+    <h2><span aria-hidden="true">⭐</span> Zlatá pravidla</h2>
+    <ol class="rules-list">
+        @foreach (var r in Model.Rules)
+        {
+            <li><strong>@r.Title</strong><br />@r.Text</li>
+        }
+    </ol>
+</section>
+
+@if (Model.IsPair)
+{
+    <aside class="guide">
+        <strong>👨‍👦 Pro průvodce:</strong> Zeptejte se, které pravidlo mu/jí přijde nejdůležitější a proč. Když ho řekne vlastními slovy, zapamatuje si ho líp.
+    </aside>
+}
+
+<p>Ve druhém kole přijdou <strong>nové zprávy</strong> stejného typu. Uvidíte, jestli se pravidla osvědčí.</p>
+<form method="post">
+    <button type="submit" class="btn btn-primary">Začít 2. kolo ▶</button>
+</form>

@@ -1,0 +1,69 @@
+@page
+@model DotaznikModel
+@{
+    ViewData["Title"] = "Pár otázek";
+}
+
+<h1>Pár otázek na začátek</h1>
+@if (Model.IsPair)
+{
+    <p class="lead">Odpovídejte za toho, komu trénink ukazujete. Podle toho vybereme zprávy, které mu mohou opravdu přijít.</p>
+}
+else
+{
+    <p class="lead">Podle odpovědí vybereme zprávy, které vám mohou opravdu přijít.</p>
+}
+
+@if (Model.Error is not null)
+{
+    <p class="alert" role="alert">⚠️ @Model.Error</p>
+}
+
+<form method="post">
+    @foreach (var q in DotaznikModel.Questions)
+    {
+        Model.Answers.TryGetValue(q.Key, out var current);
+        <fieldset class="card question">
+            <legend>@(Model.IsPair ? q.Pair : q.Self)</legend>
+            <div class="yesno">
+                <label class="choice choice-inline">
+                    <input type="radio" name="Answers[@q.Key]" value="ano" checked="@(current == "ano")" required /> <span>Ano</span>
+                </label>
+                <label class="choice choice-inline">
+                    <input type="radio" name="Answers[@q.Key]" value="ne" checked="@(current == "ne")" /> <span>Ne</span>
+                </label>
+            </div>
+        </fieldset>
+    }
+    <fieldset class="card personal">
+        <legend>Nepovinné: ať zprávy vypadají jako ze života</legend>
+        <p class="small">Tyhle údaje jen dosadíme do cvičných zpráv. Držíme je v dočasné paměti serveru nejdéle 2 hodiny a nikdy je neukládáme do statistik. Stačí křestní jméno nebo přezdívka. <a href="/OchranaDat">Podrobnosti</a></p>
+
+        <label class="field">
+            <span>@(Model.IsPair ? "Jak ho/ji oslovují děti nebo vnoučata?" : "Jak vás oslovují děti nebo vnoučata?")</span>
+            <select name="Greeting">
+                <option value="">— nevybráno —</option>
+                @foreach (var g in Personalizer.Greetings)
+                {
+                    <option value="@g" selected="@(Model.Greeting == g)">@g</option>
+                }
+            </select>
+        </label>
+
+        <label class="field">
+            <span>@(Model.IsPair ? "Jméno dítěte nebo vnoučete, které mu/jí píše" : "Jméno dítěte nebo vnoučete, které vám píše")</span>
+            <input type="text" name="PersonName" value="@Model.PersonName" maxlength="30" autocomplete="off" placeholder="např. Pavel" />
+        </label>
+        <div class="yesno small-yesno">
+            <label class="choice choice-inline"><input type="radio" name="PersonGender" value="muz" checked="@(Model.PersonGender != "zena")" /> <span>je to on</span></label>
+            <label class="choice choice-inline"><input type="radio" name="PersonGender" value="zena" checked="@(Model.PersonGender == "zena")" /> <span>je to ona</span></label>
+        </div>
+
+        <label class="field">
+            <span>@(Model.IsPair ? "Jeho/její banka" : "Vaše banka")</span>
+            <input type="text" name="BankName" value="@Model.BankName" maxlength="30" autocomplete="off" placeholder="např. Moje banka" />
+        </label>
+    </fieldset>
+
+    <button type="submit" class="btn btn-primary">Pokračovat ▶</button>
+</form>

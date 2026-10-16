@@ -1,0 +1,41 @@
+@page
+@model StatistikyModel
+@{
+    ViewData["Title"] = "Statistiky";
+}
+
+<h1>Anonymní statistiky</h1>
+
+<div class="results">
+    <div class="result-col"><div class="result-label">Dokončené tréninky</div><div class="result-value">@Model.Sessions</div></div>
+    <div class="result-col"><div class="result-label">Zlepšilo se</div><div class="result-value">@Model.Improved</div></div>
+    <div class="result-col"><div class="result-label">Průměr 1. kolo</div><div class="result-value">@Model.AvgBefore.ToString("0") %</div></div>
+    <div class="result-col"><div class="result-label">Průměr 2. kolo</div><div class="result-value">@Model.AvgAfter.ToString("0") %</div></div>
+</div>
+
+<h2>Na jaké triky se lidé chytají nejčastěji</h2>
+<table class="table">
+    <thead><tr><th>Kategorie</th><th>Počet nezvládnutých zpráv</th></tr></thead>
+    <tbody>
+        @foreach (var (info, count) in Model.Weak)
+        {
+            <tr><td>@info.Icon @info.Label</td><td>@count</td></tr>
+        }
+    </tbody>
+</table>
+
+<h2>Úspěšnost podle scénáře (nejtěžší nahoře)</h2>
+<table class="table">
+    <thead><tr><th>Scénář</th><th>Druh</th><th>Odpovědí</th><th>Bezpečně</th></tr></thead>
+    <tbody>
+        @foreach (var r in Model.Rows)
+        {
+            <tr>
+                <td>@r.Id</td>
+                <td>@(r.IsScam ? "podvod" : "skutečná")</td>
+                <td>@r.Answered</td>
+                <td>@(r.Answered == 0 ? 0 : r.Safe * 100 / r.Answered) %</td>
+            </tr>
+        }
+    </tbody>
+</table>

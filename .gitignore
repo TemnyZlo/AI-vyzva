@@ -1,0 +1,7 @@
+bin/
+obj/
+.vs/
+*.user
+*.suo
+# anonymní statistiky z lokálního běhu
+src/Nachytej/data/

@@ -1,0 +1,11 @@
+[
+  { "id": 1, "title": "Banka nikdy nechce PIN, heslo ani kód z SMS", "text": "Ani po telefonu, ani e-mailem, ani přes odkaz. Kdo o ně žádá, je podvodník – i když zní přesně jako banka." },
+  { "id": 2, "title": "Volá banka nebo policie? Zavěste a zavolejte sami", "text": "Vytočte číslo ze zadní strany platební karty nebo z oficiálního webu. Nikdy ne číslo, které vám dal volající nebo zpráva." },
+  { "id": 3, "title": "Žádný „bezpečný účet“ neexistuje", "text": "Kdo chce, abyste peníze převedli „do bezpečí“, vybrali v hotovosti nebo vložili do bitcoinomatu, je podvodník." },
+  { "id": 4, "title": "Nic neinstalujte na žádost cizího člověka", "text": "Žádné aplikace na „vzdálenou pomoc“ ani nic, co vám pošle neznámý odkaz. Dávají podvodníkovi kontrolu nad telefonem." },
+  { "id": 5, "title": "Píše „syn“ nebo „vnučka“ z nového čísla? Ověřte si to", "text": "Zavolejte na staré číslo, nebo se zeptejte na rodinné heslo. Dnes už lze napodobit i hlas." },
+  { "id": 6, "title": "Spěch a strach jsou varování", "text": "„Hned“, „jinak přijdete o peníze“, „nikomu to neříkejte“ – takhle tlačí podvodníci. Skutečná banka vám dá čas." },
+  { "id": 7, "title": "Když už se něco stalo, volejte hned", "text": "Ihned volejte banku (číslo ze zadní strany karty) a nechte zablokovat kartu i bankovnictví. Pak Policii ČR na 158. Nestyďte se – čím dřív, tím větší šance peníze zachránit." },
+  { "id": 8, "title": "Na odkazy ve zprávách neklikejte", "text": "Doplatek za balík, blokace karty, výhra… Do aplikace nebo na web jděte sami, ne přes odkaz ve zprávě." },
+  { "id": 9, "title": "Za výhru ani vrácení peněz se předem neplatí", "text": "Poplatek za výhru, za výplatu „zisku“ nebo za vrácení přeplatku je vždy podvod. Kdo vám má peníze dát, nepotřebuje vaši kartu." }
+]

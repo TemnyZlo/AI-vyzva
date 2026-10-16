@@ -1,0 +1,22 @@
+@model RenderedMessage
+@{
+    var s = Model.Scenario;
+    var (icon, label) = s.Channel switch
+    {
+        "sms" => ("💬", "SMS"),
+        "email" => ("✉️", "E-mail"),
+        "call" => ("📞", "Telefonát (přepis toho, co volající říká)"),
+        "chat" => ("🟣", "WhatsApp / chat"),
+        "web" => ("🌐", "Na internetu (reklama nebo okno v prohlížeči)"),
+        _ => ("💬", "Zpráva"),
+    };
+}
+<article class="message message-@s.Channel">
+    <div class="message-channel"><span aria-hidden="true">@icon</span> @label</div>
+    <div class="message-sender">@Model.Sender</div>
+    @if (Model.Subject is not null)
+    {
+        <div class="message-subject">Předmět: <strong>@Model.Subject</strong></div>
+    }
+    <div class="message-body">@Model.Body</div>
+</article>

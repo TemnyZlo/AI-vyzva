@@ -1,0 +1,84 @@
+@page
+@model VysledekModel
+@{
+    ViewData["Title"] = "Výsledek";
+    var diff = Model.After.Safe - Model.Before.Safe;
+}
+
+<h1>Hotovo! Takhle vám to šlo</h1>
+
+<div class="results">
+    <div class="result-col">
+        <div class="result-label">1. kolo (před pravidly)</div>
+        <div class="result-value">@Model.Before.Safe / @Model.Before.Count</div>
+        <div class="bar"><span style="width:@(Model.Before.Count == 0 ? 0 : Model.Before.Safe * 100 / Model.Before.Count)%"></span></div>
+    </div>
+    <div class="result-col">
+        <div class="result-label">2. kolo (po pravidlech)</div>
+        <div class="result-value">@Model.After.Safe / @Model.After.Count</div>
+        <div class="bar bar-after"><span style="width:@(Model.After.Count == 0 ? 0 : Model.After.Safe * 100 / Model.After.Count)%"></span></div>
+    </div>
+</div>
+<p class="muted">Počet zpráv, u kterých jste zvolili nejbezpečnější postup.</p>
+
+@if (diff > 0)
+{
+    <p class="lead"><span aria-hidden="true">🎉</span> Ve druhém kole jste zvládli o <strong>@diff</strong> @(diff == 1 ? "zprávu" : diff < 5 ? "zprávy" : "zpráv") víc.</p>
+}
+else if (Model.After.Safe == Model.After.Count)
+{
+    <p class="lead"><span aria-hidden="true">🎉</span> Druhé kolo bez chyby. Skvělé!</p>
+}
+else
+{
+    <p class="lead">Nevadí, že to tentokrát nebylo lepší. Nejdůležitější jsou pravidla na kartičce – ta fungují vždycky.</p>
+}
+
+<section class="weak card">
+    <h2><span aria-hidden="true">🎯</span> Na co si dávat pozor právě vy</h2>
+    @if (Model.WeakSpots.Count == 0)
+    {
+        <p>U podvodů jste pokaždé zvolili nejbezpečnější postup. Výborně! Pravidla na kartičce si přesto nechte po ruce.</p>
+    }
+    else
+    {
+        <p>Tyhle triky vás v tréninku nachytaly nejčastěji:</p>
+        <ul class="weak-list">
+            @foreach (var (info, count) in Model.WeakSpots)
+            {
+                <li>
+                    <span class="signal-chip signal-@info.Key"><span aria-hidden="true">@info.Icon</span> @info.Label</span>
+                    <span class="muted">(@count×)</span><br />@info.Tip
+                </li>
+            }
+        </ul>
+    }
+</section>
+
+<div class="honest">
+    <strong>Poctivě:</strong> trénink snižuje riziko, ale <strong>nezaručuje bezpečí</strong>. Podvody se pořád mění a umělá inteligence dnes umí napodobit i hlas nebo video známého člověka. Proto nespoléhejte na to, že podvod „poznáte“ – spolehněte se na pravidla: <em>zavěsit, ověřit si to sám, zeptat se rodiny.</em>
+</div>
+
+<a class="btn btn-primary" href="/Karticka">🖨️ Kartička s rodinnými pravidly</a>
+<a class="btn btn-sos" href="/Pomoc">🚨 Co dělat, když se to opravdu stane</a>
+
+@if (Model.IsPair)
+{
+    <aside class="guide">
+        <strong>👨‍👦 Pro průvodce:</strong> Vytiskněte kartičku, vyplňte spolu rodinné heslo a dejte ji k telefonu nebo na lednici.
+    </aside>
+}
+
+<section class="card more">
+    <h2><span aria-hidden="true">💪</span> Chcete trénovat dál?</h2>
+    <p>Vyzkoušejte i <a href="https://www.kybertest.cz/" target="_blank" rel="noopener">Kybertest</a> České bankovní asociace. Procvičíte v něm, jak poznat podvodné zprávy, telefonáty a weby.</p>
+</section>
+
+<form method="post" asp-page-handler="Restart">
+    <button type="submit" class="btn btn-secondary">↺ Začít znovu (nové zprávy)</button>
+</form>
+
+@if (Model.Consent)
+{
+    <p class="muted">Anonymní výsledek byl uložen. Děkujeme, pomáháte ověřit, jestli trénink funguje.</p>
+}

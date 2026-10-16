@@ -1,0 +1,699 @@
+[
+  // ===== PODVOD: falešný bankéř / policista (telefon) =====
+  {
+    "id": "bank-call-a", "kind": "scam", "channel": "call", "pairGroup": "bank-call", "core": true, "difficulty": 2,
+    "sender": "Volá: +420 000 111 222 (představuje se jako {banka})",
+    "text": "Dobrý den, tady Martin Novák, bezpečnostní oddělení – {banka}. Zaznamenali jsme podezřelou platbu 48 900 Kč z vašeho účtu. Váš účet je napadený a musíme jednat hned, jinak o peníze přijdete. Přepojím vás na kolegu, který vám založí bezpečný účet, kam peníze přesunete. Zatím o tom nikomu neříkejte, zkomplikovalo by to vyšetřování.",
+    "highlights": [
+      { "signal": "identita", "fragment": "bezpečnostní oddělení", "reason": "Podvodníci se rádi vydávají za „bezpečnost“ banky. Zní to důvěryhodně a úředně." },
+      { "signal": "spech", "fragment": "musíme jednat hned, jinak o peníze přijdete", "reason": "Spěch a strach. Mají vám vzít čas na přemýšlení." },
+      { "signal": "penize", "fragment": "bezpečný účet", "reason": "Žádný bezpečný účet neexistuje. Tohle je nejjistější znak podvodu." },
+      { "signal": "utajeni", "fragment": "Zatím o tom nikomu neříkejte", "reason": "Chtějí vás odříznout od rodiny, která by podvod poznala." }
+    ],
+    "actionScores": { "click_or_reply": 0, "call_number_in_message": 0, "verify_myself": 2, "ask_family": 2, "ignore": 1 },
+    "choices": [
+      { "action": "click_or_reply", "label": "Nechám se přepojit na kolegu a udělám, co řekne" },
+      { "action": "call_number_in_message", "label": "Zavěsím a zavolám zpět na číslo, ze kterého volali" },
+      { "action": "verify_myself", "label": "Zavěsím a zavolám do banky na číslo ze zadní strany karty" },
+      { "action": "ask_family", "label": "Řeknu, že si to rozmyslím, a poradím se s rodinou" },
+      { "action": "ignore", "label": "Zavěsím a dál to neřeším" }
+    ],
+    "explanation": "Tohle je jeden z nejčastějších a nejdražších podvodů: „podvodný bankéř“. Číslo na displeji může vypadat jako číslo banky – podvodníci ho umějí napodobit. Správný postup: zavěsit a zavolat do banky sami na číslo ze zadní strany karty.",
+    "guideTip": "Zeptejte se: „Jak bys poznal(a), že volá opravdu banka?“ Ukažte číslo na zadní straně karty a domluvte se, že se volá vždycky na něj.",
+    "ruleIds": [2, 3, 6],
+    "source": "Vzor podle veřejných varování Policie ČR a bank", "reviewedAt": "2026-10-16"
+  },
+  {
+    "id": "bank-call-b", "kind": "scam", "channel": "call", "pairGroup": "bank-call", "core": true, "difficulty": 2,
+    "sender": "Volá: +420 000 222 333 (představuje se jako policie)",
+    "text": "Dobrý den, tady nadporučík Dvořák, Policie České republiky, oddělení kybernetické kriminality. Vyšetřujeme zaměstnance vaší banky, který zneužívá účty klientů. Vaše úspory jsou v ohrožení. Abychom je ochránili, musíte je dnes vybrat a vložit přes bitcoinomat na zabezpečený státní účet. Pomůže vám s tím kolega, nainstalujte si prosím aplikaci pro vzdálenou pomoc.",
+    "highlights": [
+      { "signal": "identita", "fragment": "Policie České republiky", "reason": "Skutečná policie nikdy nechce, abyste někam převáděli nebo vkládali peníze." },
+      { "signal": "penize", "fragment": "dnes vybrat a vložit přes bitcoinomat", "reason": "Vkládání peněz do bitcoinomatu je typický znak podvodu – peníze jsou pak nevratně pryč." },
+      { "signal": "penize", "fragment": "zabezpečený státní účet", "reason": "Stát ani policie žádné „bezpečné účty“ pro lidi nemají." },
+      { "signal": "aplikace", "fragment": "nainstalujte si prosím aplikaci pro vzdálenou pomoc", "reason": "Aplikace na vzdálený přístup dá podvodníkovi kontrolu nad vaším telefonem nebo počítačem." }
+    ],
+    "actionScores": { "click_or_reply": 0, "call_number_in_message": 0, "verify_myself": 2, "ask_family": 2, "ignore": 1 },
+    "choices": [
+      { "action": "click_or_reply", "label": "Vyberu peníze a udělám, co policista říká" },
+      { "action": "call_number_in_message", "label": "Zavolám zpět na číslo, ze kterého volal, jestli je to pravda" },
+      { "action": "verify_myself", "label": "Zavěsím a zavolám na policii na 158" },
+      { "action": "ask_family", "label": "Než cokoli udělám, poradím se s někým blízkým" },
+      { "action": "ignore", "label": "Zavěsím a nic nedělám" }
+    ],
+    "explanation": "Podvodníci se často střídají: nejdřív volá „banka“, pak „policie“, aby to vypadalo věrohodně. Skutečná policie vás nikdy nepožádá o peníze ani o instalaci aplikace. Zavěste a zavolejte sami na 158.",
+    "guideTip": "Vysvětlete, že policii jde vždycky ověřit – stačí zavěsit a vytočit 158. Nikdo poctivý se nebude zlobit, že si to ověřujete.",
+    "ruleIds": [2, 3, 4],
+    "source": "Vzor podle veřejných varování Policie ČR", "reviewedAt": "2026-10-16"
+  },
+
+  // ===== PODVOD: „mám nové číslo“ =====
+  {
+    "id": "new-number-a", "kind": "scam", "channel": "chat", "pairGroup": "new-number", "difficulty": 2,
+    "sender": "WhatsApp – neuložené číslo +420 000 333 444",
+    "text": "Ahoj{osloveni}, to jsem já 😊 {g:Rozbil|Rozbila} se mi telefon, tohle je moje nové číslo, staré si smaž. {g:Potřeboval|Potřebovala} bych pomoct – dneska musím zaplatit fakturu 18 600 Kč a z nového telefonu mi ještě nejde bankovnictví. Můžeš to za mě poslat? Zítra ti to vrátím. Číslo účtu ti hned pošlu. Prosím pospěš si, je to dnes splatné.",
+    "highlights": [
+      { "signal": "identita", "fragment": "tohle je moje nové číslo, staré si smaž", "reason": "Chtějí, abyste nemohli zavolat na staré, skutečné číslo." },
+      { "signal": "penize", "fragment": "z nového telefonu mi ještě nejde bankovnictví", "reason": "Typická výmluva, proč máte platit zrovna vy." },
+      { "signal": "spech", "fragment": "Prosím pospěš si", "reason": "Spěch – abyste neměli čas si to ověřit." }
+    ],
+    "actionScores": { "click_or_reply": 0, "call_number_in_message": 1, "verify_myself": 2, "ask_family": 2, "ignore": 1 },
+    "choices": [
+      { "action": "click_or_reply", "label": "Napíšu, ať pošle číslo účtu, a peníze pošlu" },
+      { "action": "call_number_in_message", "label": "Zavolám na to nové číslo, jestli je to opravdu {blizky|on}" },
+      { "action": "verify_myself", "label": "Zavolám na staré číslo, které mám uložené" },
+      { "action": "ask_family", "label": "Zeptám se ostatních v rodině, jestli o tom něco vědí" },
+      { "action": "ignore", "label": "Neodpovím a zprávu smažu" }
+    ],
+    "explanation": "Podvod „ahoj, mám nové číslo“. Podvodník se vydává za vaše dítě nebo vnouče. Ověření je snadné: zavolejte na staré číslo, nebo se zeptejte na rodinné heslo. Umělá inteligence dnes umí napodobit i hlas, takže ani hlasová zpráva není důkaz.",
+    "guideTip": "Domluvte si rodinné heslo – slovo, které zná jen rodina. Na konci tréninku ho zapíšete na kartičku.",
+    "ruleIds": [5, 6],
+    "source": "Vzor podle veřejných varování Policie ČR", "reviewedAt": "2026-10-16"
+  },
+  {
+    "id": "new-number-b", "kind": "scam", "channel": "sms", "pairGroup": "new-number", "difficulty": 2,
+    "sender": "SMS z neznámého čísla +420 000 555 666",
+    "text": "Ahoj{osloveni}, to jsem já, píšu z kamarádova telefonu, můj se vybil. Jsem v obchodě a nefunguje mi karta. Můžeš mi rychle poslat 4 500 Kč? Večer ti to vrátím. Nevolej, nemůžu teď mluvit, jen napiš, až to pošleš.",
+    "highlights": [
+      { "signal": "identita", "fragment": "píšu z kamarádova telefonu", "reason": "Vysvětlení, proč píše z cizího čísla – aby to nevypadalo podezřele." },
+      { "signal": "penize", "fragment": "rychle poslat 4 500 Kč", "reason": "Žádost o peníze a k tomu spěch." },
+      { "signal": "utajeni", "fragment": "Nevolej, nemůžu teď mluvit", "reason": "Brání vám v ověření hlasem. To je silný varovný signál." }
+    ],
+    "actionScores": { "click_or_reply": 0, "call_number_in_message": 1, "verify_myself": 2, "ask_family": 2, "ignore": 1 },
+    "choices": [
+      { "action": "click_or_reply", "label": "Pošlu peníze a napíšu, že je to hotové" },
+      { "action": "call_number_in_message", "label": "Zavolám na číslo, ze kterého SMS přišla" },
+      { "action": "verify_myself", "label": "Zavolám na číslo, které mám uložené – i když píše, ať nevolám" },
+      { "action": "ask_family", "label": "Zeptám se někoho z rodiny, jestli je to pravda" },
+      { "action": "ignore", "label": "Nebudu reagovat" }
+    ],
+    "explanation": "Stejný trik jako „mám nové číslo“, jen s jinou výmluvou. Zavolejte na číslo, které máte uložené – pokud to opravdu byl váš blízký, rád vám to potvrdí.",
+    "guideTip": "Zeptejte se: „Co bys udělal(a), kdybych ti takhle napsal já?“ Pak si to vyzkoušejte – zavolejte si navzájem na uložená čísla.",
+    "ruleIds": [5, 6],
+    "source": "Vzor podle veřejných varování Policie ČR", "reviewedAt": "2026-10-16"
+  },
+
+  // ===== PODVOD: doplatek za zásilku =====
+  {
+    "id": "parcel-a", "kind": "scam", "channel": "sms", "pairGroup": "parcel", "difficulty": 1,
+    "sender": "SMS od: Zasilky-info",
+    "text": "Vaše zásilka č. CZ48213 nemohla být doručena kvůli nedoplatku poštovného 29 Kč. Uhraďte do 24 hodin, jinak bude vrácena odesílateli: https://zasilka-doplatek.example/cz",
+    "highlights": [
+      { "signal": "penize", "fragment": "nedoplatku poštovného 29 Kč", "reason": "Malá částka vás uklidní. Ve skutečnosti chtějí údaje z vaší karty – a pak z ní stáhnou mnohem víc." },
+      { "signal": "spech", "fragment": "do 24 hodin", "reason": "Časový tlak." },
+      { "signal": "odkaz", "fragment": "https://zasilka-doplatek.example/cz", "reason": "Neznámá adresa. Stav zásilky si ověřte sami v aplikaci nebo na webu přepravce, ne přes odkaz ve zprávě." }
+    ],
+    "actionScores": { "click_or_reply": 0, "call_number_in_message": 1, "verify_myself": 2, "ask_family": 2, "ignore": 2 },
+    "choices": [
+      { "action": "click_or_reply", "label": "Kliknu na odkaz a doplatím 29 Kč" },
+      { "action": "call_number_in_message", "label": "Odpovím na SMS a zeptám se, o jakou zásilku jde" },
+      { "action": "verify_myself", "label": "Podívám se do aplikace nebo na web přepravce, kam půjdu přímo" },
+      { "action": "ask_family", "label": "Zeptám se doma, jestli někdo něco neobjednával" },
+      { "action": "ignore", "label": "SMS smažu" }
+    ],
+    "explanation": "Falešné SMS o zásilkách chodí ve vlnách, nejvíc kolem Vánoc a výprodejů. Odkaz vede na stránku, která vypadá jako přepravce a chce číslo karty.",
+    "guideTip": "Ukažte, kde v mobilu najde aplikaci nebo web přepravce, a zkuste tam spolu dohledat nějakou skutečnou zásilku.",
+    "ruleIds": [8, 6],
+    "source": "Vzor podle veřejných varování přepravců a Policie ČR", "reviewedAt": "2026-10-16"
+  },
+  {
+    "id": "parcel-b", "kind": "scam", "channel": "email", "pairGroup": "parcel", "difficulty": 1,
+    "sender": "Od: Doručovací služba <info@dorucovani-cz.example>",
+    "subject": "Nepodařilo se doručit – potvrďte adresu",
+    "text": "Dobrý den,\nváš balík nebylo možné doručit, protože adresa není úplná. Klikněte na tlačítko níže, potvrďte adresu a zaplaťte poplatek za nové doručení 39 Kč.\n\n[ POTVRDIT ADRESU ]\n\nPokud adresu nepotvrdíte do 48 hodin, zásilka bude zlikvidována.",
+    "highlights": [
+      { "signal": "odkaz", "fragment": "dorucovani-cz.example", "reason": "Adresa odesílatele nepatří žádnému známému přepravci." },
+      { "signal": "penize", "fragment": "zaplaťte poplatek za nové doručení 39 Kč", "reason": "Malá částka jako návnada – jde o údaje z vaší karty." },
+      { "signal": "spech", "fragment": "zásilka bude zlikvidována", "reason": "Výhrůžka, abyste jednali rychle a nepřemýšleli." }
+    ],
+    "actionScores": { "click_or_reply": 0, "call_number_in_message": 1, "verify_myself": 2, "ask_family": 2, "ignore": 2 },
+    "choices": [
+      { "action": "click_or_reply", "label": "Kliknu na „Potvrdit adresu“ a zaplatím 39 Kč" },
+      { "action": "call_number_in_message", "label": "Odepíšu na e-mail a zeptám se, o jaký balík jde" },
+      { "action": "verify_myself", "label": "Stav zásilky zjistím v e-shopu nebo u přepravce, ne přes e-mail" },
+      { "action": "ask_family", "label": "Ukážu e-mail někomu z rodiny" },
+      { "action": "ignore", "label": "E-mail smažu" }
+    ],
+    "explanation": "Stejný trik jako u SMS, jen e-mailem. Když na nějaký balík čekáte, zjistěte jeho stav sami – v aplikaci obchodu nebo přepravce.",
+    "guideTip": "Ukažte, jak se v e-mailu zobrazí celá adresa odesílatele, a že jméno „Doručovací služba“ si může dát kdokoli.",
+    "ruleIds": [8, 6],
+    "source": "Vzor podle veřejných varování přepravců", "reviewedAt": "2026-10-16"
+  },
+
+  // ===== PODVOD: falešná SMS z banky (jen pro uživatele bankovnictví) =====
+  {
+    "id": "bank-sms-a", "kind": "scam", "channel": "sms", "pairGroup": "bank-sms", "difficulty": 3,
+    "requires": { "mobileBanking": true },
+    "sender": "SMS od: {banka}",
+    "text": "{banka}: Zaznamenali jsme přihlášení do vašeho bankovnictví z nového zařízení (Android, Brno). Pokud jste to nebyli vy, okamžitě zablokujte přístup zde: https://banka-overeni-pristupu.example/blokace",
+    "highlights": [
+      { "signal": "spech", "fragment": "okamžitě zablokujte přístup zde", "reason": "Strach, spěch a odkaz najednou. Skutečná banka vás pošle do své aplikace nebo na číslo, které znáte – ne na odkaz." },
+      { "signal": "odkaz", "fragment": "banka-overeni-pristupu.example", "reason": "Adresa jen připomíná banku. Podvodníci kupují podobně znějící adresy." }
+    ],
+    "actionScores": { "click_or_reply": 0, "call_number_in_message": 1, "verify_myself": 2, "ask_family": 2, "ignore": 1 },
+    "choices": [
+      { "action": "click_or_reply", "label": "Kliknu na odkaz a přihlásím se, ať přístup zablokuji" },
+      { "action": "call_number_in_message", "label": "Odpovím na SMS, že o žádném přihlášení nevím" },
+      { "action": "verify_myself", "label": "Otevřu svou bankovní aplikaci nebo zavolám na číslo z karty" },
+      { "action": "ask_family", "label": "Ukážu SMS někomu, komu věřím" },
+      { "action": "ignore", "label": "SMS ignoruji" }
+    ],
+    "explanation": "Podvodníci umějí poslat SMS tak, že se zobrazí pod jménem banky – někdy i ve stejném vlákně jako skutečné zprávy z banky. Na odkaz neklikejte. Otevřete bankovní aplikaci sami nebo zavolejte na číslo ze zadní strany karty.",
+    "guideTip": "Ukažte, že jméno odesílatele u SMS se dá podvrhnout. Spolu otevřete skutečnou bankovní aplikaci – tam se dá zkontrolovat všechno bez odkazu.",
+    "ruleIds": [8, 1, 2],
+    "source": "Vzor podle veřejných varování bank", "reviewedAt": "2026-10-16"
+  },
+  {
+    "id": "bank-sms-b", "kind": "scam", "channel": "sms", "pairGroup": "bank-sms", "difficulty": 3,
+    "requires": { "mobileBanking": true },
+    "sender": "SMS od: {banka}",
+    "text": "{banka}: Vaše platební karta bude z bezpečnostních důvodů zablokována. Pro zachování přístupu aktualizujte své údaje do 12:00: https://karta-aktualizace.example/aktualizace",
+    "highlights": [
+      { "signal": "spech", "fragment": "bude z bezpečnostních důvodů zablokována", "reason": "Výhrůžka zablokováním – abyste se lekli." },
+      { "signal": "udaje", "fragment": "aktualizujte své údaje do 12:00", "reason": "Termín a „aktualizace údajů“ = chtějí vaše přihlašovací údaje nebo číslo karty." },
+      { "signal": "odkaz", "fragment": "karta-aktualizace.example", "reason": "Cizí adresa, která se jen tváří jako banka." }
+    ],
+    "actionScores": { "click_or_reply": 0, "call_number_in_message": 1, "verify_myself": 2, "ask_family": 2, "ignore": 1 },
+    "choices": [
+      { "action": "click_or_reply", "label": "Kliknu na odkaz a údaje aktualizuji, ať o kartu nepřijdu" },
+      { "action": "call_number_in_message", "label": "Odpovím na SMS a zeptám se, proč mi kartu blokují" },
+      { "action": "verify_myself", "label": "Zavolám do banky na číslo ze zadní strany karty" },
+      { "action": "ask_family", "label": "Poradím se s rodinou" },
+      { "action": "ignore", "label": "SMS ignoruji" }
+    ],
+    "explanation": "Banka vás nežádá o „aktualizaci údajů“ přes odkaz v SMS. Když si nejste jistí, zavolejte na číslo ze zadní strany karty a zeptejte se.",
+    "guideTip": "Zeptejte se, kde má číslo na banku. Když ho hned neví, ukažte zadní stranu karty.",
+    "ruleIds": [8, 1, 6],
+    "source": "Vzor podle veřejných varování bank", "reviewedAt": "2026-10-16"
+  },
+
+  // ===== PODVOD: falešný kupující v bazaru (jen pro prodávající) =====
+  {
+    "id": "bazaar-a", "kind": "scam", "channel": "chat", "pairGroup": "bazaar", "difficulty": 2,
+    "requires": { "marketplaces": true },
+    "sender": "Zpráva v bazaru od kupující „Petra K.“",
+    "text": "Dobrý den, mám zájem o váš inzerát, beru za plnou cenu. Jsem teď mimo, tak využiji službu bezpečné platby a doručení. Peníze už jsem odeslala, přijměte je prosím tady: https://bezpecna-platba-bazar.example/prijem – stačí zadat údaje karty, na kterou chcete peníze poslat.",
+    "highlights": [
+      { "signal": "lakadlo", "fragment": "beru za plnou cenu", "reason": "Bez smlouvání a bez otázek – podezřele snadné." },
+      { "signal": "odkaz", "fragment": "https://bezpecna-platba-bazar.example/prijem", "reason": "Falešná platební stránka, která se jen tváří jako bazar." },
+      { "signal": "udaje", "fragment": "stačí zadat údaje karty", "reason": "Abyste peníze PŘIJALI, nikdy nepotřebujete zadávat údaje z karty, natož PIN nebo kód z SMS." }
+    ],
+    "actionScores": { "click_or_reply": 0, "call_number_in_message": 2, "verify_myself": 2, "ask_family": 2, "ignore": 2 },
+    "choices": [
+      { "action": "click_or_reply", "label": "Kliknu na odkaz a zadám kartu, ať mi peníze přijdou" },
+      { "action": "call_number_in_message", "label": "Odepíšu, ať mi peníze pošle normálně na účet" },
+      { "action": "verify_myself", "label": "Podívám se do bazaru přímo, jestli tam o platbě něco je" },
+      { "action": "ask_family", "label": "Ukážu zprávu někomu z rodiny" },
+      { "action": "ignore", "label": "Neodpovím a inzerát nechám běžet" }
+    ],
+    "explanation": "Podvod na prodávající: kupující „už zaplatil“ a posílá odkaz na přijetí peněz. Stránka vypadá jako bazar nebo přepravce, ale ve skutečnosti z vaší karty peníze stáhne. Bezpečné je osobní předání, nebo platba převodem přímo na váš účet.",
+    "guideTip": "Vysvětlete rozdíl: na PŘIJETÍ peněz stačí číslo účtu. Údaje z karty chce jen ten, kdo chce peníze vzít.",
+    "ruleIds": [8, 1],
+    "source": "Vzor podle veřejných varování Policie ČR a inzertních portálů", "reviewedAt": "2026-10-16"
+  },
+  {
+    "id": "bazaar-b", "kind": "scam", "channel": "chat", "pairGroup": "bazaar", "difficulty": 2,
+    "requires": { "marketplaces": true },
+    "sender": "WhatsApp – „kupující“ z inzerátu, +420 000 777 888",
+    "text": "Dobrý den, píšu kvůli inzerátu na kočárek. Pošlu kurýra, ten si ho vyzvedne a platbu vyřídí za mě. Jen musíte potvrdit přijetí platby přes tento odkaz: https://kuryr-platba.example/potvrzeni. Kurýr přijede zítra ráno, potvrďte to prosím ještě dnes.",
+    "highlights": [
+      { "signal": "utajeni", "fragment": "Pošlu kurýra, ten si ho vyzvedne a platbu vyřídí za mě", "reason": "Kupující se vyhýbá osobnímu kontaktu a přenáší „platbu“ na cizí službu." },
+      { "signal": "odkaz", "fragment": "potvrdit přijetí platby přes tento odkaz", "reason": "Falešný odkaz, který bude chtít údaje z vaší karty." },
+      { "signal": "spech", "fragment": "potvrďte to prosím ještě dnes", "reason": "Spěch." }
+    ],
+    "actionScores": { "click_or_reply": 0, "call_number_in_message": 2, "verify_myself": 2, "ask_family": 2, "ignore": 2 },
+    "choices": [
+      { "action": "click_or_reply", "label": "Kliknu na odkaz a potvrdím přijetí platby" },
+      { "action": "call_number_in_message", "label": "Napíšu, že zboží předám jen osobně nebo po platbě na účet" },
+      { "action": "verify_myself", "label": "Ověřím si kupujícího přímo v bazaru – hodnocení, historie" },
+      { "action": "ask_family", "label": "Zeptám se někoho, kdo na bazarech prodává" },
+      { "action": "ignore", "label": "Neodpovím" }
+    ],
+    "explanation": "Kupující často přejdou z bazaru na WhatsApp, kde je portál už neochrání. Odkaz na „potvrzení platby“ je past. Trvejte na osobním předání, nebo na platbě převodem na váš účet.",
+    "guideTip": "Zeptejte se: „Proč by kupující potřeboval, abys někam klikal, když ti má jen poslat peníze?“",
+    "ruleIds": [8, 1, 6],
+    "source": "Vzor podle veřejných varování Policie ČR a inzertních portálů", "reviewedAt": "2026-10-16"
+  },
+
+  // ===== PODVOD: falešná investice s „celebritou“ (deepfake) =====
+  {
+    "id": "invest-a", "kind": "scam", "channel": "email", "pairGroup": "invest", "difficulty": 2,
+    "sender": "Od: Finanční novinky <redakce@financni-zpravy.example>",
+    "subject": "Známý moderátor prozradil, jak vydělává 80 000 Kč měsíčně s AI",
+    "text": "V dnešním videorozhovoru prozradil známý televizní moderátor svou investiční platformu, která díky umělé inteligenci garantuje výnos 30 % měsíčně. Stačí vložit 6 000 Kč a osobní poradce se vám ozve. Banky to chtějí zakázat, proto se registrujte ještě dnes.\n\n[ ▶ Přehrát video ]",
+    "highlights": [
+      { "signal": "identita", "fragment": "známý televizní moderátor", "reason": "Podvodníci zneužívají tváře známých lidí. Video může být deepfake – uměle vytvořené pomocí AI a k nerozeznání od skutečnosti." },
+      { "signal": "lakadlo", "fragment": "garantuje výnos 30 % měsíčně", "reason": "Žádná poctivá investice nic takového zaručit nemůže." },
+      { "signal": "penize", "fragment": "osobní poradce se vám ozve", "reason": "„Poradce“ vás pak bude tlačit vkládat další peníze nebo nainstalovat aplikaci." },
+      { "signal": "utajeni", "fragment": "Banky to chtějí zakázat", "reason": "Má to vzbudit dojem tajemství, které vám „oni“ nechtějí prozradit." }
+    ],
+    "actionScores": { "click_or_reply": 0, "call_number_in_message": 0, "verify_myself": 2, "ask_family": 2, "ignore": 2 },
+    "choices": [
+      { "action": "click_or_reply", "label": "Pustím si video a zaregistruji se" },
+      { "action": "call_number_in_message", "label": "Odepíšu a zeptám se na podrobnosti" },
+      { "action": "verify_myself", "label": "Ověřím si firmu v seznamu na webu České národní banky" },
+      { "action": "ask_family", "label": "Zeptám se rodiny, co si o tom myslí" },
+      { "action": "ignore", "label": "E-mail smažu" }
+    ],
+    "explanation": "Falešné investice s „doporučením“ známé osobnosti patří k nejrozšířenějším podvodům na internetu. Video i hlas mohou být vytvořené umělou inteligencí a vypadat úplně věrohodně. Proto neřešte, jestli video vypadá pravě – dívejte se na to, co po vás chce: peníze, rychle, s garancí zisku.",
+    "guideTip": "Řekněte otevřeně: „I já bych dnes nepoznal(a), jestli je video pravé.“ Pomáhá to – senior pak nemá pocit, že selhal on.",
+    "ruleIds": [6, 8],
+    "source": "Vzor podle veřejných varování ČNB a Policie ČR", "reviewedAt": "2026-10-16"
+  },
+  {
+    "id": "invest-b", "kind": "scam", "channel": "call", "pairGroup": "invest", "difficulty": 2,
+    "sender": "Volá: +420 000 999 111 (představuje se jako investiční poradce)",
+    "text": "Dobrý den, volám z investiční platformy, kde jste se minulý týden zaregistrovali. Mám skvělou zprávu – vaše vklady už vydělaly 14 200 Kč! Abychom vám mohli zisk vyplatit, musíte nejdřív zaplatit poplatek 9 500 Kč. Pomůžu vám to nastavit, jen si nainstalujte aplikaci pro vzdálenou podporu.",
+    "highlights": [
+      { "signal": "lakadlo", "fragment": "vaše vklady už vydělaly 14 200 Kč", "reason": "Falešný zisk na obrazovce – aby vás to nalákalo poslat víc." },
+      { "signal": "penize", "fragment": "musíte nejdřív zaplatit poplatek 9 500 Kč", "reason": "Za výplatu vlastních peněz nikdo poctivý poplatek předem nechce." },
+      { "signal": "aplikace", "fragment": "nainstalujte aplikaci pro vzdálenou podporu", "reason": "Aplikace na vzdálený přístup dá podvodníkovi kontrolu nad vaším bankovnictvím." }
+    ],
+    "actionScores": { "click_or_reply": 0, "call_number_in_message": 0, "verify_myself": 2, "ask_family": 2, "ignore": 2 },
+    "choices": [
+      { "action": "click_or_reply", "label": "Zaplatím poplatek a nainstaluji aplikaci, ať dostanu zisk" },
+      { "action": "call_number_in_message", "label": "Zavolám jim zpátky, ať mi zisk pošlou bez poplatku" },
+      { "action": "verify_myself", "label": "Zavěsím a poradím se ve své bance" },
+      { "action": "ask_family", "label": "Zavěsím a řeknu to rodině" },
+      { "action": "ignore", "label": "Zavěsím a dál s nimi nekomunikuji" }
+    ],
+    "explanation": "Druhá fáze investičního podvodu: „zisk“ existuje jen na obrazovce a za jeho výplatu chtějí další peníze. Kdo jednou zaplatí, tomu volají znovu. Zavěste a poraďte se s rodinou nebo s bankou.",
+    "guideTip": "Ujistěte ho/ji, že na tyhle podvody naletí i vzdělaní lidé. Stud je to, co podvodníkům nejvíc pomáhá.",
+    "ruleIds": [4, 6],
+    "source": "Vzor podle veřejných varování ČNB a Policie ČR", "reviewedAt": "2026-10-16"
+  },
+
+  // ===== SKUTEČNÁ: zdraví (připomínka lékaře / lékárna) =====
+  {
+    "id": "legit-health-a", "kind": "legit", "channel": "sms", "pairGroup": "legit-health", "difficulty": 1,
+    "sender": "SMS od: Ordinace MUDr. Kovářová",
+    "text": "Připomínáme Vám objednání na preventivní prohlídku ve čtvrtek 23. 10. v 9:00. Pokud nemůžete přijít, zavolejte prosím do ordinace. Děkujeme.",
+    "highlights": [
+      { "signal": "ok", "fragment": "zavolejte prosím do ordinace", "reason": "Nedává vám žádné cizí číslo ani odkaz – zavoláte na ordinaci, jak ji znáte." }
+    ],
+    "actionScores": { "click_or_reply": 2, "call_number_in_message": 2, "verify_myself": 2, "ask_family": 2, "ignore": 1 },
+    "choices": [
+      { "action": "click_or_reply", "label": "Odepíšu „Děkuji, přijdu“" },
+      { "action": "call_number_in_message", "label": "Když nemůžu přijít, zavolám do ordinace" },
+      { "action": "verify_myself", "label": "Podívám se do kalendáře, jestli termín sedí" },
+      { "action": "ask_family", "label": "Řeknu doma, ať mi to připomenou" },
+      { "action": "ignore", "label": "Nic s tím nedělám" }
+    ],
+    "explanation": "Takhle vypadá obyčejná, skutečná zpráva: nechce peníze, údaje ani klikání na odkaz a nespěchá. Je fér si všímat i toho, co je v pořádku – nemusíte se bát všeho.",
+    "guideTip": "Zeptejte se: „Čím se tahle zpráva liší od těch podvodných?“ Ať to řekne sám/sama: nechce peníze, nechce údaje, nespěchá.",
+    "ruleIds": [],
+    "source": "Běžná připomínka termínu", "reviewedAt": "2026-10-16"
+  },
+  {
+    "id": "legit-health-b", "kind": "legit", "channel": "sms", "pairGroup": "legit-health", "difficulty": 1,
+    "sender": "SMS od: Lékárna U Lípy",
+    "text": "Dobrý den, Váš lék je připravený k vyzvednutí do 30. 10. Otevřeno Po–Pá 8–18 h. Lékárna U Lípy",
+    "highlights": [
+      { "signal": "ok", "fragment": "Váš lék je připravený k vyzvednutí", "reason": "Jen informace. Žádná platba předem, žádný odkaz, žádné údaje." }
+    ],
+    "actionScores": { "click_or_reply": 2, "call_number_in_message": 2, "verify_myself": 2, "ask_family": 2, "ignore": 1 },
+    "choices": [
+      { "action": "click_or_reply", "label": "Odepíšu „Děkuji, zítra se zastavím“" },
+      { "action": "call_number_in_message", "label": "Zavolám do lékárny, jestli mají otevřeno i v sobotu" },
+      { "action": "verify_myself", "label": "Ověřím si, že ten lék opravdu čekám" },
+      { "action": "ask_family", "label": "Poprosím někoho z rodiny, ať lék vyzvedne" },
+      { "action": "ignore", "label": "Nevšímám si toho" }
+    ],
+    "explanation": "Skutečná zpráva z lékárny. Pozor ale: kdyby po vás někdo za vyzvednutí léku chtěl zaplatit přes odkaz, byl by to podvod.",
+    "guideTip": "Pochvalte rozhodnutí. Cílem není bát se každé zprávy, ale vědět, na co se dívat.",
+    "ruleIds": [],
+    "source": "Běžná informační SMS", "reviewedAt": "2026-10-16"
+  },
+
+  // ===== SKUTEČNÁ: banka =====
+  {
+    "id": "legit-bank-a", "kind": "legit", "channel": "sms", "pairGroup": "legit-bank", "difficulty": 2,
+    "sender": "SMS od: {banka}",
+    "text": "{banka}: Platba kartou *4417 ve výši 349 Kč, Potraviny Novák. Pokud jste platbu neprovedli, volejte nás na čísle uvedeném na zadní straně karty.",
+    "highlights": [
+      { "signal": "ok", "fragment": "volejte nás na čísle uvedeném na zadní straně karty", "reason": "Takhle mluví skutečná banka: neposílá odkaz ani cizí číslo, posílá vás na číslo, které máte sami." }
+    ],
+    "actionScores": { "click_or_reply": 1, "call_number_in_message": 2, "verify_myself": 2, "ask_family": 2, "ignore": 2 },
+    "choices": [
+      { "action": "click_or_reply", "label": "Odpovím na SMS „OK“" },
+      { "action": "call_number_in_message", "label": "Tu platbu nepoznávám – volám na číslo ze zadní strany karty" },
+      { "action": "verify_myself", "label": "Zkontroluji platbu v aplikaci nebo ve výpisu" },
+      { "action": "ask_family", "label": "Zeptám se doma, jestli někdo platil mou kartou" },
+      { "action": "ignore", "label": "Nákup v potravinách je můj, nic neřeším" }
+    ],
+    "explanation": "Skutečné upozornění na platbu. Pokud jste platbu udělali, nemusíte nic dělat. Pokud ne, zavolejte do banky na číslo ze zadní strany karty – přesně jak zpráva radí.",
+    "guideTip": "Porovnejte spolu tuhle zprávu s falešnou SMS z banky: tahle nechce, abyste klikali, a odkazuje na číslo na kartě.",
+    "ruleIds": [2],
+    "source": "Běžné upozornění banky", "reviewedAt": "2026-10-16"
+  },
+  {
+    "id": "legit-bank-b", "kind": "legit", "channel": "sms", "pairGroup": "legit-bank", "difficulty": 3,
+    "sender": "SMS od: {banka}",
+    "text": "{banka}: Kód pro potvrzení platby 1 290 Kč u obchodu Kuchyne-eshop je 482913. Kód nikomu nesdělujte, ani pracovníkům banky.",
+    "highlights": [
+      { "signal": "ok", "fragment": "Kód nikomu nesdělujte, ani pracovníkům banky", "reason": "Skutečná banka vás sama varuje. Kdo po vás tenhle kód chce – i do telefonu – je podvodník." }
+    ],
+    "actionScores": { "click_or_reply": 0, "call_number_in_message": 1, "verify_myself": 2, "ask_family": 2, "ignore": 1 },
+    "choices": [
+      { "action": "click_or_reply", "label": "Kód nadiktuji pracovníkovi banky, který mi zrovna volá" },
+      { "action": "call_number_in_message", "label": "Odpovím na SMS a zeptám se, o jakou platbu jde" },
+      { "action": "verify_myself", "label": "Ten nákup nepoznávám – hned volám do banky na číslo z karty" },
+      { "action": "ask_family", "label": "Zeptám se doma, jestli někdo neplatil mou kartou" },
+      { "action": "ignore", "label": "Nechám to být" }
+    ],
+    "explanation": "Tahle SMS je skutečná – ale pozor na dvě situace. 1) Pokud jste zrovna nenakupovali, někdo se snaží platit vaší kartou: hned volejte banku na číslo ze zadní strany karty. 2) Pokud vám zrovna někdo volá a chce, abyste mu kód přečetli, je to podvodník. Kód z SMS nikdy nikomu nesdělujte.",
+    "guideTip": "Vysvětlete, k čemu kód je: potvrzuje platbu. Kdo ho zná, může zaplatit vašimi penězi. Proto ho nikdy nikomu.",
+    "ruleIds": [1, 7],
+    "source": "Běžná potvrzovací SMS banky", "reviewedAt": "2026-10-16"
+  },
+
+  // ===== SKUTEČNÁ: rodina =====
+  {
+    "id": "legit-family-a", "kind": "legit", "channel": "sms", "pairGroup": "legit-family", "difficulty": 1,
+    "sender": "SMS od: {blizky|Pavel} (uložený kontakt)",
+    "text": "Ahoj{osloveni}, v neděli přijedeme na oběd kolem dvanácté. Péťa se těší, veze ti obrázek, co nakreslila. Kdyby něco, volej. {blizky|Pavel}",
+    "highlights": [
+      { "signal": "ok", "fragment": "{blizky|Pavel} (uložený kontakt)", "reason": "Píše z čísla, které máte uložené – ne z „nového čísla“." },
+      { "signal": "ok", "fragment": "Kdyby něco, volej", "reason": "Nebrání vám zavolat. Nechce peníze ani nic tajit." }
+    ],
+    "actionScores": { "click_or_reply": 2, "call_number_in_message": 2, "verify_myself": 2, "ask_family": 2, "ignore": 1 },
+    "choices": [
+      { "action": "click_or_reply", "label": "Odepíšu „Těším se, uvařím svíčkovou!“" },
+      { "action": "call_number_in_message", "label": "Zavolám {g:mu|jí} a domluvíme podrobnosti" },
+      { "action": "verify_myself", "label": "Zkontroluji, že píše z uloženého čísla" },
+      { "action": "ask_family", "label": "Řeknu to doma ostatním" },
+      { "action": "ignore", "label": "Neodpovím" }
+    ],
+    "explanation": "Obyčejná zpráva od rodiny: z uloženého čísla, bez žádosti o peníze, bez spěchu, a dokonce vás vybízí zavolat. Přesný opak podvodu „mám nové číslo“.",
+    "guideTip": "Zeptejte se: „Podle čeho víš, že je to opravdu {blizky|Pavel}?“ Dobrá odpověď: uložené číslo a nic nechce.",
+    "ruleIds": [],
+    "source": "Běžná rodinná zpráva", "reviewedAt": "2026-10-16"
+  },
+  {
+    "id": "legit-family-b", "personaFemale": true, "kind": "legit", "channel": "chat", "pairGroup": "legit-family", "difficulty": 1,
+    "sender": "WhatsApp – {blizky|Jana} (uložený kontakt)",
+    "text": "Ahoj{osloveni}! Posílám fotky z výletu na Šumavu 🌲 Bylo krásně, jen jsme trochu zmokli. Večer ti zavolám a všechno povyprávím. {blizky|Jana}",
+    "highlights": [
+      { "signal": "ok", "fragment": "{blizky|Jana} (uložený kontakt)", "reason": "Uložený kontakt, žádné nové číslo." },
+      { "signal": "ok", "fragment": "Večer ti zavolám", "reason": "Sama nabízí hovor. Podvodníci se hovoru naopak vyhýbají." }
+    ],
+    "actionScores": { "click_or_reply": 2, "call_number_in_message": 2, "verify_myself": 2, "ask_family": 2, "ignore": 1 },
+    "choices": [
+      { "action": "click_or_reply", "label": "Odepíšu „Krásné fotky, těším se na večer!“" },
+      { "action": "call_number_in_message", "label": "Zavolám {g:mu|jí} hned teď" },
+      { "action": "verify_myself", "label": "Mrknu, že je to z uloženého čísla, a fotky si prohlédnu" },
+      { "action": "ask_family", "label": "Ukážu fotky doma ostatním" },
+      { "action": "ignore", "label": "Neodpovím" }
+    ],
+    "explanation": "Skutečná rodinná zpráva. Nic nechce, nespěchá, je z uloženého čísla. Na takové zprávy klidně odpovídejte.",
+    "guideTip": "Pochvalte, že rozliší běžnou zprávu od podvodu. Opatrnost neznamená přestat si s rodinou psát.",
+    "ruleIds": [],
+    "source": "Běžná rodinná zpráva", "reviewedAt": "2026-10-16"
+  },
+  // ===== PODVOD: „vnuk“ s napodobeným hlasem (deepfake) =====
+  {
+    "id": "voice-clone-a", "kind": "scam", "channel": "call", "pairGroup": "voice-clone", "core": true, "difficulty": 3,
+    "sender": "Volá: +420 000 121 212 – v telefonu zní hlas, který zní přesně jako {blizky|váš vnuk}",
+    "text": "Ahoj{osloveni}, to jsem já… {g:Měl|Měla} jsem nehodu autem, {g:srazil|srazila} jsem paní a teď jsem na policii. Prosím, neříkej to našim, zabili by mě. Hned ti zavolá můj advokát, potřebuje 150 000 Kč na kauci, jinak mě zavřou. Pošle si pro peníze kurýra, ať to máme ještě dnes.",
+    "highlights": [
+      { "signal": "identita", "fragment": "zní přesně jako {blizky|váš vnuk}", "reason": "Hlas dnes umí umělá inteligence napodobit z krátké nahrávky, třeba z videa na sociální síti. Hlas proto není důkaz." },
+      { "signal": "utajeni", "fragment": "neříkej to našim", "reason": "Utajování. Rodiče by podvod hned prokoukli." },
+      { "signal": "penize", "fragment": "potřebuje 150 000 Kč na kauci", "reason": "Kauce se nevyřizuje po telefonu ani předáním hotovosti cizímu člověku." },
+      { "signal": "penize", "fragment": "Pošle si pro peníze kurýra", "reason": "„Kurýr“ pro hotovost je typický znak podvodu „na vnuka“." }
+    ],
+    "actionScores": { "click_or_reply": 0, "call_number_in_message": 0, "verify_myself": 2, "ask_family": 2, "ignore": 1 },
+    "choices": [
+      { "action": "click_or_reply", "label": "Počkám na advokáta a připravím peníze pro kurýra" },
+      { "action": "call_number_in_message", "label": "Zavolám zpátky na číslo, ze kterého hovor přišel" },
+      { "action": "verify_myself", "label": "Zavěsím a zavolám {g:mu|jí} na číslo, které mám uložené" },
+      { "action": "ask_family", "label": "Zavolám {g:jeho|jejím} rodičům" },
+      { "action": "ignore", "label": "Zavěsím a nic neudělám" }
+    ],
+    "explanation": "Podvod „na vnuka“ – dnes i s hlasem napodobeným umělou inteligencí. Nepoznáte ho podle hlasu, ale podle toho, co chce: peníze, rychle a tajně. Zavěste a zavolejte vnukovi nebo jeho rodičům na číslo, které máte uložené, nebo se zeptejte na rodinné heslo.",
+    "guideTip": "Tohle je hlavní důvod pro rodinné heslo. Domluvte ho teď a zapište na kartičku. Řekněte: „Kdybych ti volal(a) já a chtěl(a) peníze, zeptej se mě na heslo.“",
+    "ruleIds": [5, 6, 2],
+    "source": "Vzor podle veřejných varování Policie ČR (podvod „na vnuka“), rozšířený o napodobení hlasu", "reviewedAt": "2026-10-16"
+  },
+  {
+    "id": "voice-clone-b", "personaFemale": true, "kind": "scam", "channel": "chat", "pairGroup": "voice-clone", "core": true, "difficulty": 3,
+    "sender": "WhatsApp – hlasová zpráva z neznámého čísla, hlas zní jako {blizky|vaše dcera}",
+    "text": "(přepis hlasové zprávy) Ahoj{osloveni}, {g:ztratil|ztratila} jsem v zahraničí peněženku i telefon, tohle je půjčený. Potřebuju hned 25 000 Kč na letenku domů, pošli to prosím na účet, co ti napíšu, jinak tu zůstanu trčet. Na můj starý telefon nevolej, ten nefunguje.",
+    "highlights": [
+      { "signal": "identita", "fragment": "hlas zní jako {blizky|vaše dcera}", "reason": "I hlasovou zprávu lze vyrobit pomocí umělé inteligence. Známý hlas nestačí." },
+      { "signal": "penize", "fragment": "Potřebuju hned 25 000 Kč", "reason": "Peníze a spěch." },
+      { "signal": "utajeni", "fragment": "Na můj starý telefon nevolej", "reason": "Brání vám ověřit si to tam, kde byste ji opravdu zastihli." }
+    ],
+    "actionScores": { "click_or_reply": 0, "call_number_in_message": 1, "verify_myself": 2, "ask_family": 2, "ignore": 1 },
+    "choices": [
+      { "action": "click_or_reply", "label": "Pošlu peníze na účet, který mi napíše" },
+      { "action": "call_number_in_message", "label": "Zavolám na číslo, ze kterého zpráva přišla" },
+      { "action": "verify_myself", "label": "Zkusím {g:mu|jí} zavolat na staré číslo nebo napsat jinou cestou" },
+      { "action": "ask_family", "label": "Zeptám se rodiny, jestli o cestě do zahraničí věděli" },
+      { "action": "ignore", "label": "Neodpovím" }
+    ],
+    "explanation": "Hlasová zpráva působí mnohem věrohodněji než text, a proto ji podvodníci s pomocí AI začínají používat. Postup je ale stejný: zkuste zavolat na staré číslo, napsat jejímu partnerovi nebo kamarádce, nebo se zeptat na rodinné heslo.",
+    "guideTip": "Ukažte, že ani vy byste hlas nerozeznal(a). Důležité není hlas, ale ověření jinou cestou.",
+    "ruleIds": [5, 6],
+    "source": "Vzor podle veřejných varování Policie ČR, rozšířený o napodobení hlasu", "reviewedAt": "2026-10-16"
+  },
+
+  // ===== PODVOD: falešná technická podpora =====
+  {
+    "id": "tech-support-a", "kind": "scam", "channel": "call", "pairGroup": "tech-support", "difficulty": 2,
+    "sender": "Volá: +420 000 343 434 (představuje se jako technická podpora)",
+    "text": "Dobrý den, volám z technické podpory. Z vašeho počítače se šíří viry a napadají další uživatele. Musíme to opravit hned teď, jinak vám zablokujeme internet. Otevřete prosím prohlížeč a stáhněte si program, přes který se k vám připojím. Pak se přihlásíte do bankovnictví, abychom zkontrolovali, že je účet v pořádku.",
+    "highlights": [
+      { "signal": "identita", "fragment": "volám z technické podpory", "reason": "Firmy, které vyrábějí počítače a programy, vám samy nevolají kvůli virům." },
+      { "signal": "spech", "fragment": "jinak vám zablokujeme internet", "reason": "Výhrůžka a spěch." },
+      { "signal": "aplikace", "fragment": "stáhněte si program, přes který se k vám připojím", "reason": "Program na vzdálený přístup dá podvodníkovi kontrolu nad vaším počítačem." },
+      { "signal": "udaje", "fragment": "přihlásíte do bankovnictví", "reason": "Když je podvodník připojený, vidí a ovládá všechno – i vaše bankovnictví." }
+    ],
+    "actionScores": { "click_or_reply": 0, "call_number_in_message": 0, "verify_myself": 2, "ask_family": 2, "ignore": 2 },
+    "choices": [
+      { "action": "click_or_reply", "label": "Stáhnu program, ať se můžou připojit a opravit to" },
+      { "action": "call_number_in_message", "label": "Zavolám zpět na číslo, které volalo, jestli je to pravda" },
+      { "action": "verify_myself", "label": "Zavěsím a nechám počítač zkontrolovat svým antivirem" },
+      { "action": "ask_family", "label": "Zavěsím a zavolám někomu z rodiny, kdo rozumí počítačům" },
+      { "action": "ignore", "label": "Zavěsím" }
+    ],
+    "explanation": "Falešná technická podpora chce jediné: abyste ji pustili do počítače. Pak vám „pomůže“ i s bankovnictvím. Zavěste. Když máte o počítač obavy, poraďte se s někým, koho znáte.",
+    "guideTip": "Domluvte se: „Když ti někdo zavolá kvůli počítači, zavěs a zavolej mně.“",
+    "ruleIds": [4, 6],
+    "source": "Vzor podle veřejných varování Policie ČR", "reviewedAt": "2026-10-16"
+  },
+  {
+    "id": "tech-support-b", "kind": "scam", "channel": "web", "pairGroup": "tech-support", "difficulty": 2,
+    "sender": "Okno, které se samo otevřelo v prohlížeči",
+    "text": "⚠️ VÁŠ POČÍTAČ JE ZABLOKOVÁN ⚠️\nBylo zjištěno 5 virů. Vaše fotografie a bankovní údaje jsou v ohrožení.\nNEVYPÍNEJTE POČÍTAČ. Ihned volejte bezplatnou linku technické podpory: +420 000 565 656",
+    "highlights": [
+      { "signal": "spech", "fragment": "VÁŠ POČÍTAČ JE ZABLOKOVÁN", "reason": "Skutečné antivirové programy vás takhle nestraší a nechtějí, abyste někam volali." },
+      { "signal": "spech", "fragment": "NEVYPÍNEJTE POČÍTAČ", "reason": "Naopak: zavřít prohlížeč nebo počítač vypnout je v pořádku." },
+      { "signal": "aplikace", "fragment": "Ihned volejte bezplatnou linku technické podpory", "reason": "Na lince čeká podvodník, který vás přemluví k instalaci programu na dálkové ovládání." }
+    ],
+    "actionScores": { "click_or_reply": 0, "call_number_in_message": 0, "verify_myself": 2, "ask_family": 2, "ignore": 1 },
+    "choices": [
+      { "action": "click_or_reply", "label": "Kliknu do okna a udělám, co se v něm píše" },
+      { "action": "call_number_in_message", "label": "Zavolám na linku technické podpory z okna" },
+      { "action": "verify_myself", "label": "Zavřu prohlížeč, a když to nejde, vypnu počítač" },
+      { "action": "ask_family", "label": "Zavolám někomu z rodiny, ať se na to podívá" },
+      { "action": "ignore", "label": "Nebudu nic dělat a počkám, co se stane" }
+    ],
+    "explanation": "Vyskakovací okno je jen obrázek na webové stránce, počítač ve skutečnosti zablokovaný není. Zavřete prohlížeč, a když nejde zavřít, počítač vypněte. Na číslo v okně nikdy nevolejte.",
+    "guideTip": "Ukažte, jak se zavírá prohlížeč a že vypnutí počítače nic nezničí.",
+    "ruleIds": [4, 6],
+    "source": "Vzor podle veřejných varování Policie ČR", "reviewedAt": "2026-10-16"
+  },
+
+  // ===== PODVOD: falešný e-shop (jen pro nakupující online) =====
+  {
+    "id": "fake-shop-a", "kind": "scam", "channel": "web", "pairGroup": "fake-shop", "difficulty": 2,
+    "requires": { "onlineShopping": true },
+    "sender": "Reklama na sociální síti – „Zahradní centrum Lípa“",
+    "text": "LIKVIDACE SKLADU! Zahradní nábytek, sekačky a grily se slevou až 85 %. Zbývá posledních 12 kusů! Platba pouze předem převodem na účet, zboží odešleme do 24 hodin. Objednávky jen do půlnoci.",
+    "highlights": [
+      { "signal": "lakadlo", "fragment": "slevou až 85 %", "reason": "Neuvěřitelná sleva je návnada." },
+      { "signal": "spech", "fragment": "Zbývá posledních 12 kusů!", "reason": "Umělý nedostatek, abyste nepřemýšleli." },
+      { "signal": "penize", "fragment": "Platba pouze předem převodem na účet", "reason": "Žádná dobírka ani platba kartou s možností reklamace. Peníze poslané převodem se těžko vracejí." },
+      { "signal": "spech", "fragment": "jen do půlnoci", "reason": "Časový tlak." }
+    ],
+    "actionScores": { "click_or_reply": 0, "call_number_in_message": 1, "verify_myself": 2, "ask_family": 2, "ignore": 2 },
+    "choices": [
+      { "action": "click_or_reply", "label": "Objednám a zaplatím předem, než to zmizí" },
+      { "action": "call_number_in_message", "label": "Napíšu obchodu a zeptám se, jestli jde platit na dobírku" },
+      { "action": "verify_myself", "label": "Nejdřív si obchod dohledám – recenze, kontakty, jak dlouho existuje" },
+      { "action": "ask_family", "label": "Ukážu reklamu někomu, kdo nakupuje na internetu" },
+      { "action": "ignore", "label": "Reklamu přeskočím" }
+    ],
+    "explanation": "Falešné e-shopy vznikají a mizí během pár dní, často s fotkami ukradenými ze skutečných obchodů. Než u neznámého obchodu zaplatíte, ověřte si, jak dlouho existuje, jestli má skutečné kontakty a recenze i jinde než na vlastním webu. Převodem předem neplaťte.",
+    "guideTip": "Ukažte, jak si obchod dohledat ve vyhledávači i se slovem „recenze“ nebo „podvod“.",
+    "ruleIds": [6, 8],
+    "source": "Vzor podle veřejných varování Policie ČR a ČOI", "reviewedAt": "2026-10-16"
+  },
+  {
+    "id": "fake-shop-b", "kind": "scam", "channel": "chat", "pairGroup": "fake-shop", "difficulty": 2,
+    "requires": { "onlineShopping": true },
+    "sender": "Messenger – profil „Kabelky výprodej CZ“",
+    "text": "Dobrý den, ta kabelka je originál, normálně stojí 12 000 Kč, u nás 1 900 Kč. Poštovné zdarma. Pošlete prosím celou částku na účet, kupujícím z Česka posíláme už 3 roky, recenze máme na profilu. Dobírku bohužel nenabízíme.",
+    "highlights": [
+      { "signal": "lakadlo", "fragment": "normálně stojí 12 000 Kč, u nás 1 900 Kč", "reason": "Originál za šestinu ceny neexistuje." },
+      { "signal": "penize", "fragment": "Pošlete prosím celou částku na účet", "reason": "Platba předem převodem – peníze jsou pryč, ať zboží přijde, nebo ne." },
+      { "signal": "identita", "fragment": "recenze máme na profilu", "reason": "Recenze na vlastním profilu může napsat kdokoli, i sám prodejce." },
+      { "signal": "penize", "fragment": "Dobírku bohužel nenabízíme", "reason": "Odmítnutí dobírky je varovný signál." }
+    ],
+    "actionScores": { "click_or_reply": 0, "call_number_in_message": 2, "verify_myself": 2, "ask_family": 2, "ignore": 2 },
+    "choices": [
+      { "action": "click_or_reply", "label": "Pošlu 1 900 Kč na účet" },
+      { "action": "call_number_in_message", "label": "Napíšu, že zaplatím jedině na dobírku" },
+      { "action": "verify_myself", "label": "Dohledám si prodejce a recenze i jinde na internetu" },
+      { "action": "ask_family", "label": "Zeptám se někoho, jestli to není podvod" },
+      { "action": "ignore", "label": "Nic nekoupím a neodpovím" }
+    ],
+    "explanation": "Prodej přes sociální sítě je pro podvodníky snadný – profil založí za minutu. U neznámého prodejce plaťte jen tak, aby šly peníze reklamovat, nebo na dobírku.",
+    "guideTip": "Zeptejte se: „Kdyby to nepřišlo, jak bys peníze dostal(a) zpátky?“",
+    "ruleIds": [6],
+    "source": "Vzor podle veřejných varování Policie ČR", "reviewedAt": "2026-10-16"
+  },
+
+  // ===== PODVOD: výhra =====
+  {
+    "id": "prize-a", "kind": "scam", "channel": "sms", "pairGroup": "prize", "difficulty": 1,
+    "sender": "SMS od: SuperSoutez",
+    "text": "Gratulujeme! Vaše číslo bylo vylosováno a vyhráli jste nový mobilní telefon. Pro odeslání výhry uhraďte manipulační poplatek 49 Kč do 2 hodin: https://vyhra-telefon.example/prevzit",
+    "highlights": [
+      { "signal": "lakadlo", "fragment": "Vaše číslo bylo vylosováno", "reason": "Do žádné soutěže jste se nepřihlásili." },
+      { "signal": "penize", "fragment": "uhraďte manipulační poplatek 49 Kč", "reason": "Poplatek za výhru = podvod. Jde o údaje z vaší karty." },
+      { "signal": "spech", "fragment": "do 2 hodin", "reason": "Spěch." },
+      { "signal": "odkaz", "fragment": "https://vyhra-telefon.example/prevzit", "reason": "Neznámý odkaz." }
+    ],
+    "actionScores": { "click_or_reply": 0, "call_number_in_message": 1, "verify_myself": 2, "ask_family": 2, "ignore": 2 },
+    "choices": [
+      { "action": "click_or_reply", "label": "Kliknu na odkaz a zaplatím 49 Kč za odeslání" },
+      { "action": "call_number_in_message", "label": "Odpovím na SMS a zeptám se, o jakou soutěž jde" },
+      { "action": "verify_myself", "label": "Soutěž si dohledám na internetu, ne přes odkaz v SMS" },
+      { "action": "ask_family", "label": "Zeptám se doma, co si o tom myslí" },
+      { "action": "ignore", "label": "SMS smažu" }
+    ],
+    "explanation": "Skutečná výhra nic nestojí. Kdo chce „poplatek za odeslání“, chce ve skutečnosti číslo vaší karty. Takovou SMS klidně smažte.",
+    "guideTip": "Pochvalte, když ji ignoruje. Tady je ignorování opravdu nejlepší volba.",
+    "ruleIds": [9, 8],
+    "source": "Vzor podle veřejných varování Policie ČR", "reviewedAt": "2026-10-16"
+  },
+  {
+    "id": "prize-b", "kind": "scam", "channel": "email", "pairGroup": "prize", "difficulty": 1,
+    "sender": "Od: Mezinárodní loterie <vyhra@loterie-eu.example>",
+    "subject": "Oficiální oznámení o výhře 1 250 000 Kč",
+    "text": "Vážený výherce,\nv mezinárodním slosování e-mailových adres jste vyhráli 1 250 000 Kč. K výplatě je třeba uhradit poplatek za převod 3 900 Kč a zaslat kopii občanského průkazu. Výhru je nutné vyzvednout do 5 dnů, jinak propadá.",
+    "highlights": [
+      { "signal": "lakadlo", "fragment": "slosování e-mailových adres", "reason": "Takové slosování neexistuje. Nikam jste se nepřihlásili." },
+      { "signal": "penize", "fragment": "uhradit poplatek za převod 3 900 Kč", "reason": "Za výplatu výhry se neplatí." },
+      { "signal": "udaje", "fragment": "zaslat kopii občanského průkazu", "reason": "Kopii dokladu mohou podvodníci zneužít, třeba k půjčce na vaše jméno." },
+      { "signal": "spech", "fragment": "do 5 dnů, jinak propadá", "reason": "Časový tlak." }
+    ],
+    "actionScores": { "click_or_reply": 0, "call_number_in_message": 1, "verify_myself": 2, "ask_family": 2, "ignore": 2 },
+    "choices": [
+      { "action": "click_or_reply", "label": "Pošlu poplatek a kopii občanky" },
+      { "action": "call_number_in_message", "label": "Odepíšu a zeptám se, jestli jde poplatek strhnout z výhry" },
+      { "action": "verify_myself", "label": "Ověřím si, jestli taková loterie vůbec existuje" },
+      { "action": "ask_family", "label": "Ukážu e-mail někomu z rodiny" },
+      { "action": "ignore", "label": "E-mail smažu" }
+    ],
+    "explanation": "Velká výhra, o kterou jste se nesnažili, a poplatek předem – klasický podvod. Nikomu neznámému neposílejte ani kopii dokladu.",
+    "guideTip": "Zeptejte se: „Kdy jsi naposledy vyhrál(a) v soutěži, do které ses nepřihlásil(a)?“",
+    "ruleIds": [9, 6],
+    "source": "Vzor podle veřejných varování Policie ČR", "reviewedAt": "2026-10-16"
+  },
+
+  // ===== PODVOD: falešné vrácení přeplatku =====
+  {
+    "id": "refund-a", "kind": "scam", "channel": "email", "pairGroup": "refund", "difficulty": 2,
+    "sender": "Od: Energie Plus – zákaznická péče <vratky@energie-plus-vraceni.example>",
+    "subject": "Máte nárok na vrácení přeplatku 2 840 Kč",
+    "text": "Dobrý den,\npo vyúčtování vám vznikl přeplatek 2 840 Kč. Pro jeho vrácení klikněte na odkaz a zadejte údaje platební karty, na kterou chcete peníze poslat: https://energie-plus-vraceni.example\nNárok zaniká za 72 hodin.",
+    "highlights": [
+      { "signal": "odkaz", "fragment": "vratky@energie-plus-vraceni.example", "reason": "Adresa jen připomíná dodavatele energií." },
+      { "signal": "udaje", "fragment": "zadejte údaje platební karty", "reason": "K vrácení peněz stačí číslo účtu. Údaje z karty chce jen ten, kdo chce peníze vzít." },
+      { "signal": "odkaz", "fragment": "https://energie-plus-vraceni.example", "reason": "Neznámý odkaz." },
+      { "signal": "spech", "fragment": "Nárok zaniká za 72 hodin", "reason": "Časový tlak." }
+    ],
+    "actionScores": { "click_or_reply": 0, "call_number_in_message": 1, "verify_myself": 2, "ask_family": 2, "ignore": 2 },
+    "choices": [
+      { "action": "click_or_reply", "label": "Kliknu na odkaz a zadám kartu, ať dostanu přeplatek" },
+      { "action": "call_number_in_message", "label": "Odepíšu, ať mi peníze pošlou na účet" },
+      { "action": "verify_myself", "label": "Ověřím to v zákaznickém účtu nebo na čísle z vyúčtování" },
+      { "action": "ask_family", "label": "Zeptám se doma, jestli nějaký přeplatek čekáme" },
+      { "action": "ignore", "label": "E-mail smažu" }
+    ],
+    "explanation": "Skutečný dodavatel vám přeplatek vrátí sám, na účet nebo způsobem, který u něj máte nastavený. Když si nejste jistí, přihlaste se do zákaznického účtu sami nebo zavolejte na číslo z vyúčtování.",
+    "guideTip": "Najděte spolu skutečné vyúčtování a ukažte, kde je na něm kontakt na dodavatele.",
+    "ruleIds": [9, 8],
+    "source": "Vzor podle veřejných varování Policie ČR", "reviewedAt": "2026-10-16"
+  },
+  {
+    "id": "refund-b", "kind": "scam", "channel": "sms", "pairGroup": "refund", "difficulty": 2,
+    "sender": "SMS od: FinancniUrad",
+    "text": "Finanční úřad: Na základě daňového přiznání vám bude vrácen přeplatek 4 120 Kč. Potvrďte údaje pro výplatu do 48 h: https://vraceni-dane.example/potvrdit",
+    "highlights": [
+      { "signal": "udaje", "fragment": "Potvrďte údaje pro výplatu do 48 h", "reason": "Úřad vás nežádá o údaje přes odkaz v SMS a nespěchá na vás." },
+      { "signal": "odkaz", "fragment": "https://vraceni-dane.example/potvrdit", "reason": "Odkaz nevede na oficiální web státní správy." }
+    ],
+    "actionScores": { "click_or_reply": 0, "call_number_in_message": 1, "verify_myself": 2, "ask_family": 2, "ignore": 2 },
+    "choices": [
+      { "action": "click_or_reply", "label": "Kliknu na odkaz a potvrdím údaje" },
+      { "action": "call_number_in_message", "label": "Odpovím na SMS a zeptám se na podrobnosti" },
+      { "action": "verify_myself", "label": "Zavolám na svůj finanční úřad – číslo najdu na oficiálním webu" },
+      { "action": "ask_family", "label": "Poradím se s někým, kdo mi pomáhá s daněmi" },
+      { "action": "ignore", "label": "SMS smažu" }
+    ],
+    "explanation": "Podvodníci zneužívají i jména úřadů. Přeplatek na dani se vrací tak, jak jste uvedli v přiznání. Když si nejste jistí, zavolejte na svůj finanční úřad – číslo najdete sami na oficiálním webu.",
+    "guideTip": "Vysvětlete, že jméno odesílatele SMS si může kdokoli nastavit, i na „úřad“.",
+    "ruleIds": [9, 8],
+    "source": "Vzor podle veřejných varování Policie ČR", "reviewedAt": "2026-10-16"
+  },
+
+  // ===== SKUTEČNÁ: doručení a objednávka (jen pro nakupující online) =====
+  {
+    "id": "legit-delivery-a", "kind": "legit", "channel": "sms", "pairGroup": "legit-delivery", "difficulty": 1,
+    "requires": { "onlineShopping": true },
+    "sender": "SMS od: RychlikKuryr",
+    "text": "Dobrý den, Vaše zásilka z e-shopu bude doručena dnes mezi 13:00 a 15:00. Platba: zaplaceno. Řidič Tomáš, tel. +420 000 787 878. Rychlík kurýr",
+    "highlights": [
+      { "signal": "ok", "fragment": "Platba: zaplaceno", "reason": "Nechce žádný doplatek, odkaz ani údaje." },
+      { "signal": "ok", "fragment": "Řidič Tomáš, tel.", "reason": "Číslo na řidiče je běžné. Kdyby po vás ale do telefonu chtěl platbu nebo kód, zbystřete." }
+    ],
+    "actionScores": { "click_or_reply": 2, "call_number_in_message": 2, "verify_myself": 2, "ask_family": 2, "ignore": 2 },
+    "choices": [
+      { "action": "click_or_reply", "label": "Odepíšu „Děkuji, budu doma“" },
+      { "action": "call_number_in_message", "label": "Zavolám řidiči, že nebudu doma, ať to nechá u sousedů" },
+      { "action": "verify_myself", "label": "Zkontroluji v e-shopu, že je to moje objednávka" },
+      { "action": "ask_family", "label": "Řeknu doma, ať zásilku převezmou" },
+      { "action": "ignore", "label": "Prostě počkám, až přijde" }
+    ],
+    "explanation": "Obyčejné oznámení o doručení zásilky, kterou čekáte. Nic po vás nechce. Kdyby přišlo, aniž jste něco objednali, stačí ho ignorovat.",
+    "guideTip": "Porovnejte s falešnou SMS o doplatku: tahle nechce peníze ani klikání.",
+    "ruleIds": [],
+    "source": "Běžná SMS přepravce", "reviewedAt": "2026-10-16"
+  },
+  {
+    "id": "legit-delivery-b", "kind": "legit", "channel": "email", "pairGroup": "legit-delivery", "difficulty": 1,
+    "requires": { "onlineShopping": true },
+    "sender": "Od: Kuchyne-eshop <objednavky@kuchyne-eshop.example>",
+    "subject": "Potvrzení objednávky č. 20481",
+    "text": "Dobrý den,\nděkujeme za objednávku. Rychlovarná konvice – 890 Kč, zaplaceno kartou. Zboží odešleme do 2 pracovních dnů a o odeslání vás budeme informovat. Stav objednávky najdete po přihlášení ve svém účtu na našem webu.",
+    "highlights": [
+      { "signal": "ok", "fragment": "zaplaceno kartou", "reason": "Shrnutí toho, co jste sami objednali a zaplatili. Nic dalšího nechce." },
+      { "signal": "ok", "fragment": "po přihlášení ve svém účtu na našem webu", "reason": "Nenutí vás klikat na odkaz – na web můžete jít sami." }
+    ],
+    "actionScores": { "click_or_reply": 2, "call_number_in_message": 2, "verify_myself": 2, "ask_family": 2, "ignore": 2 },
+    "choices": [
+      { "action": "click_or_reply", "label": "Vezmu na vědomí a e-mail si uložím" },
+      { "action": "call_number_in_message", "label": "Odepíšu e-shopu, jestli by šlo dodat dřív" },
+      { "action": "verify_myself", "label": "Zkontroluji objednávku ve svém účtu na webu obchodu" },
+      { "action": "ask_family", "label": "Řeknu doma, že konvice je na cestě" },
+      { "action": "ignore", "label": "E-mail si jen přečtu" }
+    ],
+    "explanation": "Skutečné potvrzení objednávky. Pokud jste ale nic neobjednávali a e-mail tvrdí, že jste zaplatili, ověřte si to ve svém bankovnictví – mohl by někdo zneužít vaši kartu.",
+    "guideTip": "Ukažte, že potvrzení objednávky je dobré si nechat – hodí se při reklamaci.",
+    "ruleIds": [],
+    "source": "Běžné potvrzení objednávky", "reviewedAt": "2026-10-16"
+  }
+]

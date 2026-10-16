@@ -1,0 +1,105 @@
+@page
+@model OchranaDatModel
+@{
+    ViewData["Title"] = "Ochrana osobních údajů";
+}
+
+<h1>Ochrana osobních údajů</h1>
+<p class="lead">Stručně: <strong>nechceme vědět, kdo jste.</strong> Nepotřebujete účet, nevyplňujete jméno, e-mail ani telefon a nepoužíváme žádné měřicí ani reklamní nástroje.</p>
+
+@if (Model.Deleted)
+{
+    <p class="best"><span aria-hidden="true">✔</span> Průběh vašeho tréninku byl smazán.</p>
+}
+
+<section class="card">
+    <h2>Co se kam ukládá</h2>
+    <div class="data-items">
+        <div class="data-item">
+            <h3><span aria-hidden="true">🍪</span> Technická cookie</h3>
+            <p class="small">náhodný identifikátor <code>.Nachytej.Session</code></p>
+            <dl>
+                <dt>Kde</dt><dd>ve vašem prohlížeči</dd>
+                <dt>Jak dlouho</dt><dd>do zavření prohlížeče</dd>
+                <dt>Proč</dt><dd>aby aplikace věděla, kterou zprávou pokračovat</dd>
+            </dl>
+        </div>
+        <div class="data-item">
+            <h3><span aria-hidden="true">🛡️</span> Ochranná cookie</h3>
+            <p class="small">proti podvrženým formulářům (<code>.AspNetCore.Antiforgery…</code>)</p>
+            <dl>
+                <dt>Kde</dt><dd>ve vašem prohlížeči</dd>
+                <dt>Jak dlouho</dt><dd>do zavření prohlížeče</dd>
+                <dt>Proč</dt><dd>bezpečnost formulářů</dd>
+            </dl>
+        </div>
+        <div class="data-item">
+            <h3><span aria-hidden="true">📝</span> Průběh tréninku</h3>
+            <p class="small">odpovědi ano/ne z dotazníku, vybrané odpovědi, skóre</p>
+            <dl>
+                <dt>Kde</dt><dd>dočasná paměť serveru – nic se nezapisuje na disk</dd>
+                <dt>Jak dlouho</dt><dd>nejdéle 2 hodiny od poslední akce, nebo do smazání tlačítkem dole</dd>
+                <dt>Proč</dt><dd>aby trénink fungoval</dd>
+            </dl>
+        </div>
+        <div class="data-item">
+            <h3><span aria-hidden="true">✏️</span> Nepovinné přizpůsobení zpráv</h3>
+            <p class="small">oslovení, jméno blízkého, název banky</p>
+            <dl>
+                <dt>Kde</dt><dd>dočasná paměť serveru, spolu s průběhem tréninku</dd>
+                <dt>Jak dlouho</dt><dd>nejdéle 2 hodiny od poslední akce</dd>
+                <dt>Proč</dt><dd>dosazení do cvičných zpráv – <strong>nikdy se neukládá do statistik</strong></dd>
+            </dl>
+        </div>
+        <div class="data-item">
+            <h3><span aria-hidden="true">📊</span> Anonymní výsledek – jen se souhlasem</h3>
+            <p class="small">náhodné číslo tréninku, datum, režim (sám / ve dvojici), odpovědi ano/ne, kategorie zvolených odpovědí a skóre</p>
+            <dl>
+                <dt>Kde</dt><dd>soubor na serveru aplikace</dd>
+                <dt>Jak dlouho</dt><dd>@Model.Retention</dd>
+                <dt>Proč</dt><dd>ověření, jestli trénink lidem pomáhá</dd>
+            </dl>
+        </div>
+    </div>
+    <p class="small">Aplikace neukládá IP adresy, nepoužívá Google Analytics ani jiné měřicí nástroje, reklamní cookies ani obsah z cizích serverů (písma, skripty). Odkazy na Policii ČR, ČNB nebo Kybertest vás přesměrují na jejich weby, kde platí jejich pravidla.</p>
+</section>
+
+<section class="card">
+    <h2>Je anonymní výsledek osobní údaj?</h2>
+    <p>Neobsahuje nic, podle čeho by šlo zjistit, kdo jste: žádné jméno, kontakt, IP adresu ani údaje pro přizpůsobení zpráv. Číslo tréninku je náhodné a po skončení tréninku ho s vámi nic nespojuje. Podle našeho posouzení proto jde o anonymní údaje.</p>
+    <p>Důsledek: když výsledek jednou uložíme, nedokážeme ho později dohledat a smazat na vaši žádost – nevíme, který je váš. Proto se ukládá jen se souhlasem a souhlas je nepovinný.</p>
+</section>
+
+<section class="card">
+    <h2>Údaje o jiných lidech</h2>
+    <p>Když do přizpůsobení napíšete jméno dítěte nebo vnoučete, zpracováváme ho jen po dobu tréninku, abychom ho dosadili do zpráv. Stačí křestní jméno nebo přezdívka – nic dalšího nepotřebujeme.</p>
+</section>
+
+<section class="card">
+    <h2>Právní základ</h2>
+    <ul>
+        <li><strong>Průběh tréninku a přizpůsobení zpráv:</strong> poskytnutí služby, o kterou si sami řeknete (čl. 6 odst. 1 písm. b GDPR).</li>
+        <li><strong>Technické cookies:</strong> jsou nezbytné pro fungování stránky, proto nevyžadují souhlas.</li>
+        <li><strong>Anonymní výsledek:</strong> váš souhlas (čl. 6 odst. 1 písm. a GDPR), pokud by šlo o osobní údaj.</li>
+    </ul>
+</section>
+
+<section class="card">
+    <h2>Kdo za to odpovídá a kde aplikace běží</h2>
+    <ul>
+        <li><strong>Správce:</strong> @Model.Controller</li>
+        <li><strong>Kontakt:</strong> @Model.Contact</li>
+        <li><strong>Provoz:</strong> @Model.Hosting. Poskytovatel hostingu může v rámci provozu zpracovávat technické údaje o spojení (např. IP adresu) podle svých podmínek.</li>
+    </ul>
+</section>
+
+<section class="card">
+    <h2>Vaše práva</h2>
+    <p>Máte právo na informace o zpracování, přístup, opravu, výmaz, omezení zpracování, odvolání souhlasu a právo podat stížnost u <a href="https://uoou.gov.cz/" target="_blank" rel="noopener">Úřadu pro ochranu osobních údajů</a>. S dotazy se obraťte na kontakt výše.</p>
+    <p>Průběh svého tréninku můžete kdykoli smazat sami:</p>
+    <form method="post" asp-page-handler="Smazat">
+        <button type="submit" class="btn btn-secondary">🗑️ Smazat průběh mého tréninku</button>
+    </form>
+</section>
+
+<p class="small">Poslední úprava: @Model.Updated</p>

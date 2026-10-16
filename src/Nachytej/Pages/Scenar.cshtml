@@ -1,0 +1,38 @@
+@page
+@model ScenarModel
+@{
+    ViewData["Title"] = $"Zpráva {Model.Number}";
+    var letters = "ABCDEFG";
+}
+
+<p class="progress">Kolo @Model.Round · zpráva @Model.Number z @Model.Total</p>
+<div class="progress-bar" aria-hidden="true"><span style="width:@((Model.Number - 1) * 100 / Model.Total)%"></span></div>
+
+<h1>@(Model.Message.Scenario.Channel switch
+{
+    "call" => "Zvoní telefon…",
+    "email" => "Přišel vám e-mail",
+    "web" => "Na internetu se vám ukázalo",
+    _ => "Přišla vám zpráva",
+})</h1>
+
+<partial name="_Message" model="Model.Message" />
+
+@if (Model.IsPair)
+{
+    <aside class="guide">
+        <strong>👨‍👦 Pro průvodce:</strong> Nechte ho/ji zprávu v klidu přečíst a rozhodnout se. Zatím nic nenapovídejte – vysvětlení přijde hned potom.
+    </aside>
+}
+
+<h2>Co uděláte?</h2>
+<form method="post" class="actions">
+    @for (var i = 0; i < Model.Choices.Count; i++)
+    {
+        var c = Model.Choices[i];
+        <button type="submit" name="choice" value="@c.Action" class="btn btn-action">
+            <span class="btn-letter" aria-hidden="true">@letters[i]</span>
+            <span class="btn-label">@c.Label</span>
+        </button>
+    }
+</form>

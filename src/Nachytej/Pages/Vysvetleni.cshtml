@@ -1,0 +1,91 @@
+@page
+@model VysvetleniModel
+@{
+    ViewData["Title"] = "Vysvětlení";
+    var s = Model.Scenario;
+    var chosen = s.ChoiceFor(Model.Answer.Action)?.Label ?? "";
+    var best = s.Choices.Where(c => s.ScoreFor(c.Action) == s.MaxChoiceScore).ToList();
+}
+
+@if (s.IsScam)
+{
+    <div class="verdict verdict-scam"><span aria-hidden="true">🚩</span> Tohle byl <strong>podvod</strong>.</div>
+}
+else
+{
+    <div class="verdict verdict-legit"><span aria-hidden="true">✅</span> Tohle byla <strong>skutečná zpráva</strong>, ne podvod.</div>
+}
+
+<div class="feedback @(Model.BestAnswer ? "feedback-good" : "feedback-tip")">
+    <p class="feedback-choice">Vybrali jste: <strong>„@chosen“</strong></p>
+    @if (Model.BestAnswer)
+    {
+        <p><span aria-hidden="true">✔</span> <strong>Výborně, to je bezpečný postup.</strong></p>
+    }
+    else if (s.IsScam && Model.Answer.Score == 0)
+    {
+        <p><span aria-hidden="true">💡</span> <strong>Na tohle se chytá spousta lidí, i mladých.</strong> Proto to tady trénujeme nanečisto.</p>
+        <p class="small">Kdyby se to stalo doopravdy: <a href="/Pomoc">co dělat hned</a>.</p>
+    }
+    else if (s.IsScam)
+    {
+        <p><span aria-hidden="true">👍</span> <strong>Nic hrozného se nestalo</strong>, ale ještě jistější je si to ověřit.</p>
+    }
+    else
+    {
+        <p><span aria-hidden="true">💡</span> <strong>Tahle zpráva byla v pořádku.</strong> Ověřit si ji ale není nikdy chyba.</p>
+    }
+</div>
+
+@if (!Model.BestAnswer)
+{
+    <div class="best">
+        <p class="best-title"><span aria-hidden="true">✔</span> Nejbezpečnější bylo:</p>
+        <ul>
+            @foreach (var b in best)
+            {
+                <li>„@b.Label“</li>
+            }
+        </ul>
+    </div>
+}
+
+<h2>@(s.IsScam ? "Na čem se to dalo poznat" : "Podle čeho poznáte skutečnou zprávu")</h2>
+<partial name="_Message" model="Model.Message" />
+
+@if (Model.Message.Marks.Count > 0)
+{
+    <ol class="marks">
+        @foreach (var m in Model.Message.Marks)
+        {
+            var sig = Signals.Get(m.Signal);
+            <li><span class="signal-chip signal-@m.Signal"><span aria-hidden="true">@sig.Icon</span> @sig.Label</span><br />@m.Reason</li>
+        }
+    </ol>
+}
+
+<p class="explanation">@s.Explanation</p>
+
+@if (Model.Rules.Count > 0)
+{
+    <section class="rules-box">
+        <h2><span aria-hidden="true">⭐</span> Zlaté pravidlo</h2>
+        @foreach (var r in Model.Rules)
+        {
+            <div class="rule"><strong>@r.Title</strong><br />@r.Text</div>
+        }
+    </section>
+}
+
+@if (Model.IsPair && !string.IsNullOrWhiteSpace(s.GuideTip))
+{
+    <aside class="guide">
+        <strong>👨‍👦 Pro průvodce:</strong> @s.GuideTip
+    </aside>
+}
+
+<form method="post">
+    <button type="submit" class="btn btn-primary">
+        @(Model.IsLastInRound ? (Model.Round == 1 ? "Dokončit 1. kolo ▶" : "Zobrazit výsledek ▶") : "Další zpráva ▶")
+    </button>
+</form>

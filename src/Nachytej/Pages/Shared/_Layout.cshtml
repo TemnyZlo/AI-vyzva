@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@(ViewData["Title"] is string t ? t + " – " : "")Nachytej se nanečisto</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header class="site-header no-print">
+        <a class="brand" href="/">🛡️ Nachytej se nanečisto</a>
+        <nav>
+            <a href="/JakToFunguje">Jak to funguje</a>
+            <a class="nav-sos" href="/Pomoc">🚨 Nachytal(a) jsem se</a>
+        </nav>
+    </header>
+
+    <main class="page">
+        @RenderBody()
+    </main>
+
+    <footer class="site-footer no-print">
+        <p>Cvičné zprávy jsou smyšlené, i když v nich může být jméno vaší banky nebo blízkého. Odkazy a čísla v nich neexistují.</p>
+        <p>Když už se něco stalo: volejte hned svou banku (číslo ze zadní strany karty) a Policii ČR na <strong>158</strong>. <a href="/Pomoc">Celý postup krok za krokem</a>.</p>
+        <p><a href="/OchranaDat">Ochrana osobních údajů</a> · <a href="/JakToFunguje">Jak to funguje a co nevíme</a></p>
+    </footer>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
